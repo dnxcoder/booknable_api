@@ -9,6 +9,7 @@ export class CreateAvailabeTimes1691567679166 implements MigrationInterface {
           {
             name: "id",
             type: "uuid",
+            isPrimary: true,
           },
           {
             name: "date",

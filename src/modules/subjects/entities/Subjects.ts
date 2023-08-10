@@ -1,5 +1,6 @@
 import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { AvailableTimes } from "./AvaiableTimes";
 
 @Entity("subjects")
 class Subjects {
@@ -11,6 +12,9 @@ class Subjects {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @OneToMany(() => AvailableTimes, (availableTimes) => availableTimes.subject)
+  availableTimes: AvailableTimes[];
 
   constructor() {
     if (!this.id) {

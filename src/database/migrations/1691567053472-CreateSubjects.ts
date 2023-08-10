@@ -9,6 +9,7 @@ export class CreateSubjects1691567053472 implements MigrationInterface {
           {
             name: "id",
             type: "uuid",
+            isPrimary: true,
           },
           {
             name: "name",

@@ -1,5 +1,12 @@
 import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from "typeorm";
+import { AvailableTimes } from "../../subjects/entities/AvaiableTimes";
 
 @Entity("users")
 class User {
@@ -23,6 +30,9 @@ class User {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @OneToMany(() => AvailableTimes, (availableTimes) => availableTimes.user)
+  availableTimes: AvailableTimes[];
 
   constructor() {
     if (!this.id) {

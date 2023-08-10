@@ -9,6 +9,7 @@ export class CreateSchedules1691567893843 implements MigrationInterface {
           {
             name: "id",
             type: "uuid",
+            isPrimary: true,
           },
           {
             name: "date",
