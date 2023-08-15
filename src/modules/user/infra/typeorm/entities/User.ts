@@ -5,33 +5,38 @@ import {
   Entity,
   JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
 } from "typeorm";
 import { AvailableTimes } from "../../../../subjects/infra/typeorm/entities/AvaiableTimes";
 import { Appointments } from "../../../../appointments/infra/typeorm/entities/Appointments";
+import { Person } from "./Person";
 
 @Entity("users")
 class User {
   @PrimaryColumn()
   id: string;
 
-  @Column()
+  @Column({nullable:false})
   email: string;
-
-  @Column()
+  
+  @Column({nullable:false})
   password: string;
 
-  @Column()
-  is_aluno: boolean;
+  @Column({nullable:false})
+  is_student: boolean;
 
-  @Column()
+  @Column({nullable:false})
   is_admin: boolean;
 
-  @Column()
-  is_professor: boolean;
+  @Column({nullable:false})
+  is_teacher: boolean;
 
   @CreateDateColumn()
   created_at: Date;
+
+  @OneToOne(() => Person, (person) => person.user)
+  person: Person;
 
   @OneToMany(() => AvailableTimes, (availableTimes) => availableTimes.teacher)
   teacherAvailableTimes: AvailableTimes[];
