@@ -3,11 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryColumn,
 } from "typeorm";
-import { User } from "../../user/entities/User";
+
 import { Subjects } from "./Subjects";
+import { User } from "../../../../user/infra/typeorm/entities/User";
 
 @Entity("available_times")
 class AvailableTimes {
@@ -23,10 +25,12 @@ class AvailableTimes {
   @CreateDateColumn()
   created_at: Date;
 
-  @ManyToOne(() => User, (user) => user.availableTimes)
-  user: User;
+  @ManyToOne(() => User, (user) => user.teacherAvailableTimes)
+  @JoinColumn({ name: "teacher_id" })
+  teacher: User;
 
-  @ManyToOne(() => Subjects, (subject) => subject.availableTimes)
+  @ManyToOne(() => Subjects, (subject) => subject.teacherAvailableTimes)
+  @JoinColumn({ name: "subject_id" })
   subject: Subjects;
 
   constructor() {

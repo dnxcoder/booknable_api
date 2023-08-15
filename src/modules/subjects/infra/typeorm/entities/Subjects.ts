@@ -1,6 +1,13 @@
 import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from "typeorm";
 import { AvailableTimes } from "./AvaiableTimes";
+import { Appointments } from "../../../../appointments/infra/typeorm/entities/Appointments";
 
 @Entity("subjects")
 class Subjects {
@@ -14,7 +21,10 @@ class Subjects {
   created_at: Date;
 
   @OneToMany(() => AvailableTimes, (availableTimes) => availableTimes.subject)
-  availableTimes: AvailableTimes[];
+  teacherAvailableTimes: AvailableTimes[];
+
+  @OneToMany(() => Appointments, (appointments) => appointments.subject)
+  subjectAppointments: Appointments[];
 
   constructor() {
     if (!this.id) {

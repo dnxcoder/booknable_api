@@ -2,7 +2,7 @@ import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 
 //Importing connection with database
-import "./database";
+import "../typeorm/";
 
 const app = express();
 

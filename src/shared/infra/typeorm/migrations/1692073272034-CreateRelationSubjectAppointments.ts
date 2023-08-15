@@ -5,12 +5,12 @@ import {
   TableForeignKey,
 } from "typeorm";
 
-export class CreateRelationBetweenSubjectsAvaliableTimes1691710163342
+export class CreateRelationSubjectAppointments1692073272034
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumn(
-      "available_times",
+      "appointments",
       new TableColumn({
         name: "subject_id",
         type: "uuid",
@@ -18,8 +18,9 @@ export class CreateRelationBetweenSubjectsAvaliableTimes1691710163342
     );
 
     await queryRunner.createForeignKey(
-      "available_times",
+      "appointments",
       new TableForeignKey({
+        name: "FK_Subject_Appointments",
         columnNames: ["subject_id"],
         referencedColumnNames: ["id"],
         referencedTableName: "subjects",
@@ -29,10 +30,8 @@ export class CreateRelationBetweenSubjectsAvaliableTimes1691710163342
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    // Reverter a criação da chave estrangeira primeiro
-    await queryRunner.dropForeignKey("available_times", "FK_..."); // Substitua "FK_..." pelo nome correto da chave estrangeira
+    await queryRunner.dropForeignKey("appointments", "FK_Subject_Appointments");
 
-    // Em seguida, reverter a adição da coluna
-    await queryRunner.dropColumn("available_times", "subject_id");
+    await queryRunner.dropColumn("appointments", "subject_id");
   }
 }
